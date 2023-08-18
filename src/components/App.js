@@ -3,13 +3,13 @@ import React,{useState} from "react";
 import './../styles/App.css';
 
 const App = () => {
-  const [todos , setTodos] = useState([{'todo' : 'Learn React', 'mark' : 'incomplete'},
-{'todo' : 'Build a React app', 'mark' : 'incomplete'},{'todo' : 'Deploy the React app', 'mark' : 'incomplete'}])
+  const [todos , setTodos] = useState([{'todo' : 'Learn React', 'isCompleted' : false},
+{'todo' : 'Build a React app', 'isCompleted' : false},{'todo' : 'Deploy the React app', 'isCompleted' : false}])
 
 function completedHandler(index){
     const updatedList = todos.map((item,idx) => {
       if(idx === index){
-        return {...item,mark : 'completed'}
+        return {...item,'isCompleted' : true}
     }
     else return item
   });
@@ -21,14 +21,13 @@ function completedHandler(index){
     <div className="parent">
       <h1>Parent Component</h1>
       <div className="child">
-        <h2>Child Component</h2>
         <ul>
+        <h2>Child Component</h2>
           {
           todos.map((item,idx) => {
-            // console.log(item);
             return(
               <li key={idx}>{item.todo }
-             { item.mark !== 'completed' && <button onClick={()=>completedHandler(idx)}>Complete</button>}</li>
+             { item.isCompleted === false  && <button onClick={()=>completedHandler(idx)}>Complete</button>}</li>
             )
           })
           }
